@@ -25,7 +25,7 @@ RUN php artisan view:clear
 # 7. Créer TOUS les dossiers de stockage et forcer les permissions
 RUN mkdir -p /app/storage/logs /app/storage/framework/sessions /app/storage/framework/views /app/storage/framework/cache /app/bootstrap/cache
 RUN chown -R www-data:www-data /app/storage /app/bootstrap/cache
-RUN chmod -R 775 /app/storage /app/bootstrap/cache
+RUN chmod -R 777 /app/storage /app/bootstrap/cache
 
 # 8. Configurer le port pour Koyeb
 ENV SERVER_NAME=":8000"

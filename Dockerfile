@@ -1,0 +1,24 @@
+FROM php:8.2-apache
+
+# Installer les extensions PHP requises (MongoDB, GD, Zip, etc.)
+RUN apt-get update && apt-get install -y libzip-dev libpng-dev unzip libssl-dev pkg-config \
+    && docker-php-ext-install zip gd \
+    && pecl install mongodb \
+    && docker-php-ext-enable mongodb
+
+# Activer mod_rewrite pour Laravel
+RUN a2enmod rewrite
+RUN sed -i 's/\/var\/www\/html/\/var\/www\/html\/public/g' /etc/apache2/sites-available/000-default.conf
+
+# Copier le projet
+WORKDIR /var/www/html
+COPY . .
+
+# Installer Composer et les dépendances
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+RUN composer install --no-dev --optimize-autoloader
+
+# Permissions
+RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+
+EXPOSE 80

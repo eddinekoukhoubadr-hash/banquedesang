@@ -23,7 +23,8 @@ RUN php artisan config:clear
 RUN php artisan cache:clear
 RUN php artisan view:clear
 
-# 7. Permissions (Lecture/Écriture pour le serveur)
+# 7. Créer TOUS les dossiers de stockage nécessaires et forcer les permissions
+RUN mkdir -p /app/storage/logs /app/storage/framework/sessions /app/storage/framework/views /app/storage/framework/cache
 RUN chown -R www-data:www-data /app/storage /app/bootstrap/cache
 RUN chmod -R 775 /app/storage /app/bootstrap/cache
 

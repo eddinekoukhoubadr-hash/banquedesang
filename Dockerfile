@@ -9,7 +9,7 @@ RUN apt-get update && apt-get install -y libzip-dev libpng-dev unzip libssl-dev 
 # Activer mod_rewrite pour Laravel
 RUN a2enmod rewrite
 RUN sed -i 's/\/var\/www\/html/\/var\/www\/html\/public/g' /etc/apache2/sites-available/000-default.conf
-
+RUN sed -i 's/Listen 80/Listen 8000/g' /etc/apache2/ports.conf
 # Copier le projet
 WORKDIR /var/www/html
 COPY . .

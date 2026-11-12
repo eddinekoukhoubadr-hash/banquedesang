@@ -18,16 +18,15 @@ RUN npm run build
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 RUN composer install --no-dev --optimize-autoloader --ignore-platform-req=ext-mongodb
 
-# 6. Nettoyer les caches pour être sûr
+# 6. Nettoyer les caches
 RUN php artisan config:clear
-RUN php artisan cache:clear
 RUN php artisan view:clear
 
-# 7. Créer TOUS les dossiers de stockage nécessaires et forcer les permissions
-RUN mkdir -p /app/storage/logs /app/storage/framework/sessions /app/storage/framework/views /app/storage/framework/cache
+# 7. Créer TOUS les dossiers de stockage et forcer les permissions
+RUN mkdir -p /app/storage/logs /app/storage/framework/sessions /app/storage/framework/views /app/storage/framework/cache /app/bootstrap/cache
 RUN chown -R www-data:www-data /app/storage /app/bootstrap/cache
 RUN chmod -R 775 /app/storage /app/bootstrap/cache
 
-# 8. Configurer le port
+# 8. Configurer le port pour Koyeb
 ENV SERVER_NAME=":8000"
 EXPOSE 8000

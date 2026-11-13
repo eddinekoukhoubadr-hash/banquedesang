@@ -103,11 +103,7 @@
                         <!-- Phénotype -->
                         <div class="md:col-span-3">
                             <label class="block text-gray-700 text-sm font-bold mb-2">Phénotype *</label>
-                            <div class="grid grid-cols-2 md:grid-cols-6 gap-4 p-4 bg-gray-50 rounded">
-                                <div>
-                                    <label class="block text-gray-600 text-sm mb-1">D</label>
-                                    <input type="text" name="phenotype_D" value="D" readonly class="w-full border rounded py-1 px-2 bg-gray-100 cursor-not-allowed">
-                                </div>
+                            <div class="grid grid-cols-2 md:grid-cols-5 gap-4 p-4 bg-gray-50 rounded">
                                 @foreach(['C','c','E','e','K'] as $item)
                                 <div>
                                     <label class="block text-gray-600 text-sm mb-1">{{ $item }}</label>
@@ -119,7 +115,7 @@
                                 @endforeach
                             </div>
                             <div class="mt-2 text-sm text-gray-600">
-                                Phénotype complet: <span id="phenotype-display" class="font-bold">{{ old('phenotype_display', $demande->phenotype ?? 'D+C+c+E+e+K+') }}</span>
+                                Phénotype complet: <span id="phenotype-display" class="font-bold">{{ old('phenotype_display', $demande->phenotype ?? 'C+c+E+e+K+') }}</span>
                             </div>
                         </div>
 
@@ -198,7 +194,7 @@
                             </label>
                             <input type="date" name="date_reception" id="date_reception"
                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700"
-                                   value="{{ old('date_reception', $demande->date_reception) }}">
+                                   value="{{ old('date_reception', $demande->date_reception ? substr($demande->date_reception,0,10) : '') }}">
                         </div>
 
                         <div>
@@ -246,7 +242,7 @@
                             </label>
                             <input type="date" name="date_expiration" id="date_expiration"
                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700"
-                                   value="{{ old('date_expiration', $demande->date_expiration) }}">
+                                   value="{{ old('date_expiration', $demande->date_expiration ? substr($demande->date_expiration,0,10) : '') }}">
                         </div>
 
                         <!-- Information du service receveur -->
@@ -268,13 +264,13 @@
                             </label>
                             <input type="datetime-local" name="date_heure_recuperation" id="date_heure_recuperation"
                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700"
-                                   value="{{ old('date_heure_recuperation', $demande->date_heure_recuperation) }}">
+                                   value="{{ old('date_heure_recuperation', $demande->date_heure_recuperation ? \Carbon\Carbon::parse($demande->date_heure_recuperation)->format('Y-m-d\TH:i') : '') }}">
                         </div>
 
                     </div>
 
                     <div class="flex items-center justify-between mt-8">
-                        <a href="{{ route('bloodbank.index') }}" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
+                        <a href="{{ route('dashboard') }}" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
                             Annuler
                         </a>
                         <button type="submit" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
@@ -293,14 +289,13 @@ document.querySelectorAll('.phenotype-select').forEach(select => {
 });
 
 function updatePhenotypeDisplay() {
-    const D = document.querySelector('input[name="phenotype_D"]').value + ' ';
     const C = document.querySelector('select[name="phenotype_C"]').value;
     const c = document.querySelector('select[name="phenotype_c"]').value;
     const E = document.querySelector('select[name="phenotype_E"]').value;
     const e = document.querySelector('select[name="phenotype_e"]').value;
     const K = document.querySelector('select[name="phenotype_K"]').value;
 
-    const phenotypeComplet = D + C + c + E + e + K;
+    const phenotypeComplet = C + c + E + e + K;
     document.getElementById('phenotype-display').textContent = phenotypeComplet;
 }
 

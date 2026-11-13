@@ -20,7 +20,7 @@
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="date_demande">
                                 Date de demande *
                             </label>
-                            <input type="date" name="date_demande" id="date_demande" 
+                            <input type="date" name="date_demande" id="date_demande"
                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                    value="{{ old('date_demande', date('Y-m-d')) }}" required>
                         </div>
@@ -29,7 +29,7 @@
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="heure_demande">
                                 Heure de demande *
                             </label>
-                            <input type="time" name="heure_demande" id="heure_demande" 
+                            <input type="time" name="heure_demande" id="heure_demande"
                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                    value="{{ old('heure_demande', date('H:i')) }}" required>
                         </div>
@@ -38,7 +38,7 @@
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="nom_prenom">
                                 Nom et Prénom du patient *
                             </label>
-                            <input type="text" name="nom_prenom" id="nom_prenom" 
+                            <input type="text" name="nom_prenom" id="nom_prenom"
                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                    value="{{ old('nom_prenom') }}" required>
                         </div>
@@ -47,7 +47,7 @@
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="service">
                                 Service *
                             </label>
-                            <select name="service" id="service" 
+                            <select name="service" id="service"
                                     class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
                                 <option value="">Sélectionner un service</option>
                                 @foreach($services as $service)
@@ -62,19 +62,19 @@
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="medecin_demandeur">
                                 Médecin demandeur *
                             </label>
-                            <input type="text" name="medecin_demandeur" id="medecin_demandeur" 
+                            <input type="text" name="medecin_demandeur" id="medecin_demandeur"
                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                    value="{{ old('medecin_demandeur') }}" required>
                         </div>
 
                         <!-- Informations médicales -->
-                        
+
 
                         <div>
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="dossier">
                                 N° Dossier *
                             </label>
-                            <input type="text" name="dossier" id="dossier" 
+                            <input type="text" name="dossier" id="dossier"
                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                    value="{{ old('dossier') }}" required>
                         </div>
@@ -83,7 +83,7 @@
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="ipp">
                                 IPP *
                             </label>
-                            <input type="text" name="ipp" id="ipp" 
+                            <input type="text" name="ipp" id="ipp"
                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                    value="{{ old('ipp') }}" required>
                         </div>
@@ -92,7 +92,7 @@
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="groupage">
                                 Groupage sanguin *
                             </label>
-                            <select name="groupage" id="groupage" 
+                            <select name="groupage" id="groupage"
                                     class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
                                 <option value="">Sélectionner</option>
                                 @foreach(['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'] as $grp)
@@ -105,11 +105,6 @@
                         <div class="md:col-span-3">
     <label class="block text-gray-700 text-sm font-bold mb-2">Phénotype *</label>
     <div class="grid grid-cols-2 md:grid-cols-6 gap-4 p-4 bg-gray-50 rounded">
-        <!-- D fixé -->
-        <div>
-            <label class="block text-gray-600 text-sm mb-1">D</label>
-            <input type="text" name="phenotype_D" value="D" readonly class="w-full border rounded py-1 px-2 bg-gray-100 cursor-not-allowed">
-        </div>
 
         @foreach(['C','c','E','e','K'] as $item)
         <div>
@@ -123,14 +118,14 @@
     </div>
 </div>
 
-                            
+
                         </div>
 
                         <div>
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="rai">
                                 RAI *
                             </label>
-                            <select name="rai" id="rai" 
+                            <select name="rai" id="rai"
                                     class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
                                 <option value="">Sélectionner</option>
                                 <option value="Positive" {{ old('rai') == 'Positive' ? 'selected' : '' }}>Positive</option>
@@ -142,7 +137,7 @@
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="psl">
                                 PSL *
                             </label>
-                            <select name="psl" id="psl" 
+                            <select name="psl" id="psl"
                                     class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
                                 <option value="">Sélectionner</option>
                                 <option value="CGR" {{ old('psl') == 'CGR' ? 'selected' : '' }}>CGR</option>
@@ -155,7 +150,7 @@
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="quantite_demandee">
                                 Quantité demandée *
                             </label>
-                            <input type="number" name="quantite_demandee" id="quantite_demandee" 
+                            <input type="number" name="quantite_demandee" id="quantite_demandee"
                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                    value="{{ old('quantite_demandee') }}" min="1" required>
                         </div>
@@ -169,7 +164,7 @@
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="statut_demande">
                                 Statut de la demande *
                             </label>
-                            <select name="statut_demande" id="statut_demande" 
+                            <select name="statut_demande" id="statut_demande"
                                     class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
                                 @foreach($statuts as $statut)
                                     <option value="{{ $statut }}" {{ old('statut_demande', 'En cours d\'envoie') == $statut ? 'selected' : '' }}>
@@ -183,7 +178,7 @@
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="motif_non_conformite">
                                 Motif de non conformité
                             </label>
-                            <textarea name="motif_non_conformite" id="motif_non_conformite" 
+                            <textarea name="motif_non_conformite" id="motif_non_conformite"
                                       class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                       rows="3">{{ old('motif_non_conformite') }}</textarea>
                         </div>
@@ -194,7 +189,7 @@
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="quantite_recue">
                                 Quantité reçue
                             </label>
-                            <input type="number" name="quantite_recue" id="quantite_recue" 
+                            <input type="number" name="quantite_recue" id="quantite_recue"
                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                    value="{{ old('quantite_recue') }}" min="0">
                         </div>
@@ -203,7 +198,7 @@
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="date_reception">
                                 Date de réception
                             </label>
-                            <input type="date" name="date_reception" id="date_reception" 
+                            <input type="date" name="date_reception" id="date_reception"
                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                    value="{{ old('date_reception') }}">
                         </div>
@@ -212,7 +207,7 @@
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="heure_reception">
                                 Heure de réception
                             </label>
-                            <input type="time" name="heure_reception" id="heure_reception" 
+                            <input type="time" name="heure_reception" id="heure_reception"
                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                    value="{{ old('heure_reception') }}">
                         </div>
@@ -221,7 +216,7 @@
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="receptionne_par">
                                 Réceptionné par
                             </label>
-                            <select name="receptionne_par" id="receptionne_par" 
+                            <select name="receptionne_par" id="receptionne_par"
                                     class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                                 <option value="">Sélectionner</option>
                                 @foreach($receptionnesPar as $personne)
@@ -232,20 +227,13 @@
                             </select>
                         </div>
 
-                        <div>
-                            <label class="block text-gray-700 text-sm font-bold mb-2" for="recupere_par">
-                                Récupéré par
-                            </label>
-                            <input type="text" name="recupere_par" id="recupere_par" 
-                                   class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                   value="{{ old('recupere_par') }}">
-                        </div>
+
 
                         <div>
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="code_psl">
                                 Code PSL
                             </label>
-                            <input type="text" name="code_psl" id="code_psl" 
+                            <input type="text" name="code_psl" id="code_psl"
                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                    value="{{ old('code_psl') }}">
                         </div>
@@ -254,7 +242,7 @@
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="date_expiration">
                                 Date d'expiration
                             </label>
-                            <input type="date" name="date_expiration" id="date_expiration" 
+                            <input type="date" name="date_expiration" id="date_expiration"
                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                    value="{{ old('date_expiration') }}">
                         </div>
@@ -272,12 +260,19 @@
     </select>
 </div>
 
-
+<div>
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="recupere_par">
+                                Récupéré par
+                            </label>
+                            <input type="text" name="recupere_par" id="recupere_par"
+                                   class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                   value="{{ old('recupere_par') }}">
+                        </div>
                         <div>
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="date_heure_recuperation">
                                 Date et heure de récupération
                             </label>
-                            <input type="datetime-local" name="date_heure_recuperation" id="date_heure_recuperation" 
+                            <input type="datetime-local" name="date_heure_recuperation" id="date_heure_recuperation"
                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                    value="{{ old('date_heure_recuperation') }}">
                         </div>
@@ -303,14 +298,13 @@ document.querySelectorAll('.phenotype-select').forEach(select => {
 });
 
 function updatePhenotypeDisplay() {
-    const D = document.querySelector('select[name="phenotype_D"]').value;
     const C = document.querySelector('select[name="phenotype_C"]').value;
     const c = document.querySelector('select[name="phenotype_c"]').value;
     const E = document.querySelector('select[name="phenotype_E"]').value;
     const e = document.querySelector('select[name="phenotype_e"]').value;
     const K = document.querySelector('select[name="phenotype_K"]').value;
-    
-    const phenotypeComplet = D + C + c + E + e + K;
+
+    const phenotypeComplet =  C + c + E + e + K;
     document.getElementById('phenotype-display').textContent = phenotypeComplet;
 }
 

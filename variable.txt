@@ -1,0 +1,11 @@
+APP_DEBUG=true
+APP_ENV=production
+APP_KEY=base64:HJNTd3dlozi/QjNAFPZhpMKl70cyHwRbTXrR+LrZQGI=
+APP_NAME=Banque de Sang
+APP_URL=https://modern-gladys-bloodebank-38eaffa4.apps.mistral.run
+CACHE_DRIVER=array
+DB_CONNECTION=mongodb
+DB_DATABASE=banquedesang
+LOG_CHANNEL=stderr
+MONGO_URI=mongodb+srv://eddinekoukhoubadr_db_user:9K3B8xXyprkacVHe@badr.lejl25a.mongodb.net/?retryWrites=true&w=majority
+SESSION_DRIVER=cookie

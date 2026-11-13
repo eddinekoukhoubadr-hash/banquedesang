@@ -112,7 +112,6 @@ class BloodBankController extends Controller
             'dossier' => 'required|string|max:255',
             'ipp' => 'required|string|max:255',
             'groupage' => 'required|string|max:50',
-            'phenotype_D' => 'required|string',
             'phenotype_C' => 'required|string',
             'phenotype_c' => 'required|string',
             'phenotype_E' => 'required|string',
@@ -124,8 +123,8 @@ class BloodBankController extends Controller
             'statut_demande' => 'required|string'
         ]);
 
-        $phenotype = $request->phenotype_D . ' ' . $request->phenotype_C . $request->phenotype_c .
-                     $request->phenotype_E . $request->phenotype_e . $request->phenotype_K;
+        $phenotype = $request->phenotype_C . $request->phenotype_c .
+             $request->phenotype_E . $request->phenotype_e . $request->phenotype_K;
 
         BloodBank::create([
             'user_id' => Auth::id(),
@@ -189,7 +188,6 @@ class BloodBankController extends Controller
             'dossier' => 'required|string|max:255',
             'ipp' => 'required|string|max:255',
             'groupage' => 'required|string|max:50',
-            'phenotype_D' => 'required|string',
             'phenotype_C' => 'required|string',
             'phenotype_c' => 'required|string',
             'phenotype_E' => 'required|string',
@@ -201,8 +199,8 @@ class BloodBankController extends Controller
             'statut_demande' => 'required|string',
         ]);
 
-        $phenotype = $request->phenotype_D . ' ' . $request->phenotype_C . $request->phenotype_c .
-                     $request->phenotype_E . $request->phenotype_e . $request->phenotype_K;
+        $phenotype = $request->phenotype_C . $request->phenotype_c .
+             $request->phenotype_E . $request->phenotype_e . $request->phenotype_K;
 
         $data = $request->all();
         $data['phenotype'] = $phenotype;

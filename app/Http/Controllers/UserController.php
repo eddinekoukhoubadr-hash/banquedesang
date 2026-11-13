@@ -32,8 +32,18 @@ class UserController extends Controller
             'name' => $r->name,
             'email' => $r->email,
             'role' => $r->role,
-            'password' => Hash::make($r->password),
+            'password' => $r->password, // Le modèle va hasher automatiquement
         ]);
+
+        // Ajout automatique à la liste des techniciennes si le rôle est "technicien"
+        if ($r->role === 'technicien') {
+            $setting = \App\Models\Setting::first();
+            if ($setting) {
+                $techs = $setting->techniciennes ?? [];
+                $techs[] = $r->name;
+                $setting->update(['techniciennes' => array_values(array_unique($techs))]);
+            }
+        }
 
         return redirect()->route('users.index')->with('success', 'Utilisateur créé avec succès.');
     }
@@ -45,22 +55,22 @@ class UserController extends Controller
     }
 
     public function update(Request $r, $id)
-{
-    $user = User::findOrFail($id);
+    {
+        $user = User::findOrFail($id);
 
-    // Validation seulement pour le mot de passe
-    $r->validate([
-        'password' => 'nullable|min:6|confirmed',
-    ]);
+        $r->validate([
+            'password' => 'nullable|min:6|confirmed',
+        ]);
 
-    // Mettre à jour seulement le mot de passe si fourni
-    if (!empty($r->password)) {
-        $user->password = Hash::make($r->password);
-        $user->save();
+        if (!empty($r->password)) {
+            // On passe le mot de passe EN CLAIR, le modèle va le hasher automatiquement
+            $user->update([
+                'password' => $r->password
+            ]);
+        }
+
+        return redirect()->route('users.index')->with('success', 'Mot de passe modifié avec succès.');
     }
-
-    return redirect()->route('users.index')->with('success', 'Mot de passe modifié avec succès.');
-}
 
     public function destroy($id)
     {
@@ -89,8 +99,10 @@ class UserController extends Controller
             return back()->withErrors(['current_password' => 'Le mot de passe actuel est incorrect.']);
         }
 
-        $user->password = Hash::make($r->password);
-        $user->save();
+        // On passe le mot de passe EN CLAIR, le modèle va le hasher
+        $user->update([
+            'password' => $r->password
+        ]);
 
         return back()->with('success', 'Mot de passe modifié avec succès.');
     }

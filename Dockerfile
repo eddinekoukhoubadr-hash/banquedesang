@@ -1,5 +1,7 @@
 FROM dunglas/frankenphp:php8.2
 
+USER root
+
 # 1. Installer les extensions PHP
 RUN install-php-extensions mongodb gd zip
 
@@ -22,14 +24,13 @@ RUN composer install --no-dev --optimize-autoloader --ignore-platform-req=ext-mo
 RUN php artisan config:clear
 RUN php artisan view:clear
 
-# 7. Créer TOUS les dossiers de stockage et forcer les permissions
+# 7. Créer les dossiers de stockage et forcer les permissions à 777
 RUN mkdir -p /app/storage/logs /app/storage/framework/sessions /app/storage/framework/views /app/storage/framework/cache /app/bootstrap/cache
-RUN chown -R www-data:www-data /app/storage /app/bootstrap/cache
-RUN chmod -R 777 /app/storage /app/bootstrap/cache
+RUN chmod -R 777 /app
 
 # 8. Configurer le port pour Koyeb
 ENV SERVER_NAME=":8000"
 HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
   CMD curl -f http://localhost:8000/ || exit 1
-RUN chmod -R 777 /app
+
 EXPOSE 8000

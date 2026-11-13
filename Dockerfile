@@ -29,6 +29,7 @@ RUN chmod -R 777 /app/storage /app/bootstrap/cache
 
 # 8. Configurer le port pour Koyeb
 ENV SERVER_NAME=":8000"
-HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 CMD curl -f http://localhost:8000/ || exit 1
+HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
+  CMD curl -f http://localhost:8000/ || exit 1
 RUN chmod -R 777 /app
 EXPOSE 8000

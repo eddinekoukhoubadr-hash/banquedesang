@@ -2,10 +2,10 @@ FROM dunglas/frankenphp:php8.2
 
 USER root
 
-# 1. Installer les extensions PHP
-RUN install-php-extensions mongodb gd zip
+# 1. Extensions PHP (mongodb en version 1.x)
+RUN install-php-extensions mongodb-1.21.0 gd zip
 
-# 2. Installer Node.js pour compiler le CSS/JS
+# 2. Node.js pour compiler le CSS/JS
 RUN apt-get update && apt-get install -y nodejs npm
 
 # 3. Copier le projet
@@ -16,19 +16,19 @@ COPY . .
 RUN npm install
 RUN npm run build
 
-# 5. Installer Composer
+# 5. Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
-RUN composer install --no-dev --optimize-autoloader --ignore-platform-req=ext-mongodb
+RUN composer install --no-dev --optimize-autoloader
 
 # 6. Nettoyer les caches
 RUN php artisan config:clear
 RUN php artisan view:clear
 
-# 7. Créer les dossiers de stockage et forcer les permissions à 777
+# 7. Dossiers de stockage et permissions
 RUN mkdir -p /app/storage/logs /app/storage/framework/sessions /app/storage/framework/views /app/storage/framework/cache /app/bootstrap/cache
-RUN chmod -R 777 /app
+RUN chmod -R 777 /app/storage /app/bootstrap/cache
 
-# 8. Configurer le port pour Koyeb
+# 8. Port pour Koyeb
 ENV SERVER_NAME=":8000"
 HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
   CMD curl -f http://localhost:8000/ || exit 1

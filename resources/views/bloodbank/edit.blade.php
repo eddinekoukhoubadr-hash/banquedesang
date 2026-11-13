@@ -100,22 +100,27 @@
                             </select>
                         </div>
 
-                        <!-- Phénotype -->
+                        <!-- Phénotype (sans D) -->
+                        @php
+                            // Retire le "D+" / "D-" des anciennes demandes
+                            $ph = preg_replace('/^D[+-]/', '', $demande->phenotype ?? '');
+                        @endphp
                         <div class="md:col-span-3">
                             <label class="block text-gray-700 text-sm font-bold mb-2">Phénotype *</label>
                             <div class="grid grid-cols-2 md:grid-cols-5 gap-4 p-4 bg-gray-50 rounded">
-                                @foreach(['C','c','E','e','K'] as $item)
+                                @foreach(['C','c','E','e','K'] as $i => $item)
+                                @php $val = old('phenotype_'.$item, substr($ph, $i * 2, 2)); @endphp
                                 <div>
                                     <label class="block text-gray-600 text-sm mb-1">{{ $item }}</label>
                                     <select name="phenotype_{{ $item }}" class="w-full border rounded py-1 px-2 phenotype-select" required>
-                                        <option value="{{ $item }}+" {{ old('phenotype_'.$item, substr($demande->phenotype ?? '', strpos('D'.$item, $item), 2)) == $item.'+' ? 'selected' : '' }}>{{ $item }}+</option>
-                                        <option value="{{ $item }}-" {{ old('phenotype_'.$item, substr($demande->phenotype ?? '', strpos('D'.$item, $item), 2)) == $item.'-' ? 'selected' : '' }}>{{ $item }}-</option>
+                                        <option value="{{ $item }}+" {{ $val == $item.'+' ? 'selected' : '' }}>{{ $item }}+</option>
+                                        <option value="{{ $item }}-" {{ $val == $item.'-' ? 'selected' : '' }}>{{ $item }}-</option>
                                     </select>
                                 </div>
                                 @endforeach
                             </div>
                             <div class="mt-2 text-sm text-gray-600">
-                                Phénotype complet: <span id="phenotype-display" class="font-bold">{{ old('phenotype_display', $demande->phenotype ?? 'C+c+E+e+K+') }}</span>
+                                Phénotype complet: <span id="phenotype-display" class="font-bold">{{ $ph ?: 'C+c+E+e+K+' }}</span>
                             </div>
                         </div>
 

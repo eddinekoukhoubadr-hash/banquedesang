@@ -6,15 +6,15 @@ USER root
 RUN install-php-extensions mongodb-1.21.0 gd zip
 
 # 2. Node.js pour compiler le CSS/JS
-RUN apt-get update && apt-get install -y nodejs npm
+RUN apt-get update && apt-get install -y --no-install-recommends nodejs npm \
+    && rm -rf /var/lib/apt/lists/*
 
 # 3. Copier le projet
 WORKDIR /app
 COPY . .
 
-# 4. Compiler les assets (Vite)
-RUN npm install
-RUN npm run build
+# 4. Compiler les assets (Vite) puis supprimer node_modules
+RUN npm install && npm run build && rm -rf node_modules /root/.npm
 
 # 5. Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
